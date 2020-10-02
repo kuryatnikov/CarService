@@ -1,0 +1,76 @@
+﻿<Window x:Class="CarService.Windows.CarsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarService"
+        mc:Ignorable="d"
+        Title="CarsWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Name="CarsListBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                 ItemsSource="{Binding Cars }" AutoGenerateColumns="False" CanUserAddRows="False"
+                 IsReadOnly="True" RowHeaderWidth="0" SelectedItem="{Binding SelectedCar}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Марка" Binding="{Binding CarBrand}" Width="0.25*" MinWidth="100"/>
+                <DataGridTextColumn Header="Модель" Binding="{Binding CarModel}" Width="0.25*" MinWidth="100"/>
+                <DataGridTextColumn Header="Номер" Binding="{Binding CarNumber}" Width="0.25*" MinWidth="100"/>
+                <DataGridTemplateColumn Header ="Работы" Width="0.25*" MinWidth="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Список работ" Background="LightBlue" BorderBrush="LightBlue" Click="WorksButtonClick"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="LightGray" />
+                            <Setter Property="Foreground"
+                                    Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+        </DataGrid>
+        <Button Content="Добавить" Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                Click="AddCarButtonClick"/>
+
+        <Button Content="Редактировать" Grid.Row="1" Grid.Column="1"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                Click="ChangeCarButtonClick"/>
+
+        <Button Content="Удалить" Grid.Row="1" Grid.Column="2"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                Click="DeleteCarClick"/>
+
+        <Button Content="Добавить работу" Grid.Row="1" Grid.Column="3"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                Click="AddWorkTypeButtonClick"/>
+
+
+    </Grid>
+</Window>
